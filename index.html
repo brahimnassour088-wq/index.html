@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brahim Nassour — Sites Web Professionnels</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#f9f6f1;
+--dark:#1a1410;
+--orange:#e85d04;
+--green:#25D366;
+--gray:#6b6560;
+--white:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Plus Jakarta Sans',sans-serif;
+background:var(--bg);
+color:var(--dark);
+overflow-x:hidden;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+/* NAVBAR */
+nav{
+padding:18px 6vw;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(249,246,241,.95);
+position:sticky;
+top:0;
+z-index:100;
+border-bottom:1px solid rgba(0,0,0,.05);
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-family:'Fraunces',serif;
+font-size:1.2rem;
+font-weight:900;
+}
+
+.logo span{
+color:var(--orange);
+}
+
+.nav-btn{
+background:var(--dark);
+color:white;
+padding:10px 20px;
+border-radius:100px;
+text-decoration:none;
+font-weight:700;
+font-size:.85rem;
+}
+
+/* HERO */
+.hero{
+padding:70px 6vw;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:50px;
+align-items:center;
+min-height:90vh;
+}
+
+.tag{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:rgba(232,93,4,.1);
+color:var(--orange);
+padding:7px 14px;
+border-radius:100px;
+font-size:.78rem;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--green);
+}
+
+.hero h1{
+font-family:'Fraunces',serif;
+font-size:clamp(2.5rem,5vw,4.2rem);
+line-height:1.08;
+margin-bottom:20px;
+}
+
+.hero h1 em{
+color:var(--orange);
+font-style:italic;
+}
+
+.hero p{
+color:var(--gray);
+line-height:1.7;
+font-size:1rem;
+margin-bottom:28px;
+max-width:500px;
+}
+
+.btns{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn-green,.btn-outline{
+padding:15px 26px;
+border-radius:14px;
+text-decoration:none;
+font-weight:700;
+font-size:.95rem;
+}
+
+.btn-green{
+background:var(--green);
+color:white;
+}
+
+.btn-outline{
+border:1px solid rgba(0,0,0,.15);
+color:var(--dark);
+}
+
+/* CARD */
+.box{
+background:white;
+padding:30px;
+border-radius:24px;
+box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+
+.small-title{
+font-size:.75rem;
+font-weight:800;
+letter-spacing:.1em;
+color:var(--gray);
+text-transform:uppercase;
+margin-bottom:18px;
+}
+
+.list{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.item{
+display:flex;
+gap:14px;
+padding:14px;
+border-radius:14px;
+background:var(--bg);
+}
+
+.item span{
+font-size:1.3rem;
+}
+
+.item strong{
+display:block;
+font-size:.92rem;
+margin-bottom:3px;
+}
+
+.item p{
+font-size:.78rem;
+color:var(--gray);
+margin:0;
+}
+
+/* SERVICES */
+.services{
+background:var(--dark);
+color:white;
+padding:80px 6vw;
+}
+
+.sec-tag{
+display:block;
+font-size:.75rem;
+font-weight:800;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:var(--orange);
+margin-bottom:14px;
+}
+
+.services h2,
+.why h2,
+.cta h2{
+font-family:'Fraunces',serif;
+font-size:clamp(2rem,4vw,3rem);
+margin-bottom:35px;
+line-height:1.1;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
+align-items:stretch;
+}
+
+.card{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:28px;
+min-height:320px;
+display:flex;
+flex-direction:column;
+}
+
+.card h3{
+margin:12px 0;
+font-size:1rem;
+min-height:48px;
+}
+
+.card p{
+color:rgba(255,255,255,.65);
+line-height:1.6;
+font-size:.92rem;
+}
+
+.icon{
+font-size:1.7rem;
+}
+
+/* WHY */
+.why{
+padding:80px 6vw;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.why h2 em,
+.cta h2 em{
+color:var(--orange);
+font-style:italic;
+}
+
+.why p{
+color:var(--gray);
+line-height:1.7;
+margin-bottom:24px;
+}
+
+.points{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.point{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.check{
+width:28px;
+height:28px;
+border-radius:50%;
+background:rgba(37,211,102,.12);
+color:var(--green);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+}
+
+.stats{
+background:var(--dark);
+color:white;
+padding:32px;
+border-radius:24px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.stats strong{
+display:block;
+font-size:2rem;
+font-family:'Fraunces',serif;
+color:var(--orange);
+}
+
+.stats span{
+font-size:.85rem;
+color:rgba(255,255,255,.65);
+}
+
+/* CTA */
+.cta{
+padding:90px 6vw;
+text-align:center;
+}
+
+.cta p{
+color:var(--gray);
+margin-bottom:28px;
+}
+
+.big-btn{
+display:inline-block;
+padding:18px 34px;
+background:var(--green);
+color:white;
+text-decoration:none;
+border-radius:100px;
+font-weight:800;
+}
+
+/* FOOTER */
+footer{
+padding:25px 6vw;
+display:flex;
+justify-content:space-between;
+gap:12px;
+flex-wrap:wrap;
+border-top:1px solid rgba(0,0,0,.08);
+}
+
+footer span{
+font-size:.85rem;
+color:var(--gray);
+}
+
+.orange{
+color:var(--orange);
+font-weight:700;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.hero,
+.why{
+grid-template-columns:1fr;
+gap:35px;
+padding:50px 5vw;
+min-height:auto;
+}
+
+.hero h1{
+font-size:2.2rem;
+}
+
+.btns{
+flex-direction:column;
+}
+
+.btn-green,.btn-outline{
+width:100%;
+text-align:center;
+}
+
+.services,
+.cta{
+padding:60px 5vw;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.card{
+min-height:auto;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+footer{
+flex-direction:column;
+align-items:flex-start;
+padding:25px 5vw;
+}
+}
+
+@media(max-width:480px){
+.stats{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:1.95rem;
+}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">Brahim <span>.</span></div>
+<a href="https://wa.me/23565008485" class="nav-btn">💬 WhatsApp</a>
+</nav>
+
+<section class="hero">
+
+<div>
+<div class="tag"><span class="dot"></span> Disponible maintenant</div>
+
+<h1>Votre entreprise mérite un <em>site web professionnel.</em></h1>
+
+<p>Je crée des sites modernes pour restaurants, boutiques, pharmacies, écoles et hôtels au Tchad.</p>
+
+<div class="btns">
+<a href="https://wa.me/23565008485" class="btn-green">💬 Démarrer mon projet</a>
+<a href="#services" class="btn-outline">Voir les services</a>
+</div>
+</div>
+
+<div class="box">
+<div class="small-title">Je travaille pour</div>
+
+<div class="list">
+
+<div class="item">
+<span>🍽️</span>
+<div>
+<strong>Restaurants</strong>
+<p>Menu en ligne</p>
+</div>
+</div>
+
+<div class="item">
+<span>👗</span>
+<div>
+<strong>Boutiques</strong>
+<p>Catalogue produits</p>
+</div>
+</div>
+
+<div class="item">
+<span>💊</span>
+<div>
+<strong>Pharmacies</strong>
+<p>Horaires & services</p>
+</div>
+</div>
+
+<div class="item">
+<span>🏫</span>
+<div>
+<strong>Écoles</strong>
+<p>Programmes</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<section class="services" id="services">
+
+<span class="sec-tag">Ce que je fais</span>
+<h2>Mes services</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">🖥️</div>
+<h3>Site Vitrine</h3>
+<p>Présentez votre business de façon professionnelle.</p>
+</div>
+
+<div class="card">
+<div class="icon">🔄</div>
+<h3>Mises à Jour</h3>
+<p>Je modifie votre site quand vous voulez.</p>
+</div>
+
+<div class="card">
+<div class="icon">📱</div>
+<h3>100% Mobile</h3>
+<p>Parfait sur téléphone, tablette et ordinateur.</p>
+</div>
+
+<div class="card">
+<div class="icon">⚡</div>
+<h3>Livraison Rapide</h3>
+<p>Votre site prêt en quelques jours.</p>
+</div>
+
+</div>
+</section>
+
+<section class="why">
+
+<div>
+<span class="sec-tag">Pourquoi moi</span>
+<h2>Un développeur qui connaît <em>le marché local.</em></h2>
+
+<p>Prix accessibles, communication directe sur WhatsApp et résultats rapides.</p>
+
+<div class="points">
+<div class="point"><span class="check">✓</span> Réponse en moins de 24h</div>
+<div class="point"><span class="check">✓</span> Prix adaptés</div>
+<div class="point"><span class="check">✓</span> Support continu</div>
+</div>
+</div>
+
+<div class="stats">
+<div><strong>24h</strong><span>Temps réponse</span></div>
+<div><strong>100%</strong><span>Mobile</span></div>
+<div><strong>5+</strong><span>Clients types</span></div>
+<div><strong>∞</strong><span>Ambition</span></div>
+</div>
+
+</section>
+
+<section class="cta">
+<h2>Prêt à avoir votre <em>site web ?</em></h2>
+<p>Envoyez un message maintenant.</p>
+<a href="https://wa.me/23565008485" class="big-btn">💬 Écrire sur WhatsApp</a>
+</section>
+
+<footer>
+<span>© 2026 <span class="orange">Brahim Nassour</span></span>
+<span>📞 +235 65 00 84 85</span>
+<span>En route vers le premier million 🚀</span>
+</footer>
+
+</body>
+  </html>
