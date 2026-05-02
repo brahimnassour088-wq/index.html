@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hôtel Sao — N'Djamena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #8b0000;
+            --red2: #6b0000;
+            --gold: #d4a843;
+            --gold2: #f0c96a;
+            --dark: #0a0604;
+            --dark2: #130c07;
+            --cream: #fdf8f0;
+            --white: #fffdf8;
+            --gray: #7a6a5a;
+            --green: #25D366;
+            --border: rgba(212,168,67,0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0a0604;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            padding: 16px 5vw;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0;
+            background: rgba(10,6,4,0.96);
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { display: flex; flex-direction: column; }
+        .logo-cn {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem; color: var(--gold); letter-spacing: 0.15em;
+        }
+        .logo-fr {
+            font-size: 0.65rem; color: rgba(255,255,255,0.35);
+            letter-spacing: 0.2em; text-transform: uppercase;
+        }
+        .nav-wa {
+            display: flex; align-items: center; gap: 7px;
+            background: var(--green); color: white;
+            padding: 10px 18px; border-radius: 3px;
+            text-decoration: none; font-size: 0.82rem; font-weight: 700;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100svh;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 0 5vw 60px;
+        }
+
+        /* Background with real photos */
+        .hero-grid {
+            position: absolute; inset: 0;
+            display: grid; grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .hg { overflow: hidden; }
+        .hg img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Dark overlay */
+        .hero-ov {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(10,6,4,1) 0%,
+                rgba(10,6,4,0.75) 40%,
+                rgba(10,6,4,0.4) 100%
+            );
+        }
+
+        /* Red vignette */
+        .hero-vignette {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(100,0,0,0.3) 100%);
+        }
+
+        /* Chinese pattern */
+        .hero-pattern {
+            position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(
+                45deg, transparent, transparent 50px,
+                rgba(212,168,67,0.02) 50px, rgba(212,168,67,0.02) 51px
+            ), repeating-linear-gradient(
+                -45deg, transparent, transparent 50px,
+                rgba(212,168,67,0.02) 50px, rgba(212,168,67,0.02) 51px
+            );
+        }
+
+        /* Big Chinese character */
+        .hero-deco {
+            position: absolute; right: 4vw; top: 50%; transform: translateY(-60%);
+            font-family: 'Noto Serif SC', serif;
+            font-size: 10rem; font-weight: 700; line-height: 1;
+            color: var(--gold); opacity: 0.05;
+            writing-mode: vertical-rl;
+            letter-spacing: 0.1em; pointer-events: none;
+        }
+
+        /* Gold vertical lines */
+        .hero-lines {
+            position: absolute; left: 5vw; top: 0; bottom: 0;
+            display: flex; gap: 6px; align-items: stretch;
+        }
+        .hl { width: 1px; background: linear-gradient(to bottom, transparent 10%, rgba(212,168,67,0.3) 50%, transparent 90%); }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-stars { display: flex; gap: 5px; margin-bottom: 16px; }
+        .star { color: var(--gold); font-size: 1rem; }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 12px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.68rem; color: var(--gold);
+            letter-spacing: 0.3em; margin-bottom: 14px;
+        }
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: ''; width: 28px; height: 1px; background: var(--gold); opacity: 0.5;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 12vw, 6rem);
+            font-weight: 800; line-height: 0.95;
+            letter-spacing: -0.02em; margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 0%, var(--gold2) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-cn {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem; color: var(--gold);
+            letter-spacing: 0.25em; margin-bottom: 20px; display: block;
+        }
+
+        .hero-sub {
+            font-size: 0.9rem; color: rgba(255,255,255,0.5);
+            line-height: 1.75; margin-bottom: 30px; max-width: 340px;
+        }
+
+        .hero-btns { display: flex; flex-direction: column; gap: 10px; }
+
+        .btn-wa {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--green); color: white;
+            padding: 17px; border-radius: 3px;
+            text-decoration: none; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 8px 28px rgba(37,211,102,0.3);
+        }
+        .btn-ghost {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: rgba(212,168,67,0.08);
+            border: 1px solid rgba(212,168,67,0.3);
+            color: var(--gold); padding: 15px; border-radius: 3px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            display: flex; align-items: center; gap: 14px;
+            padding: 20px 5vw;
+            background: var(--red2);
+        }
+        .dv-line { flex: 1; height: 1px; background: rgba(212,168,67,0.25); }
+        .dv-cn {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.7rem; color: var(--gold2);
+            letter-spacing: 0.25em;
+        }
+        .dv-sym { color: var(--gold); opacity: 0.7; font-size: 0.9rem; }
+
+        /* ── ABOUT ── */
+        .about {
+            padding: 52px 5vw;
+            background: var(--dark2);
+            position: relative; overflow: hidden;
+        }
+        .about::after {
+            content: '萨奥';
+            position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+            font-family: 'Noto Serif SC', serif;
+            font-size: 9rem; font-weight: 700; color: var(--gold); opacity: 0.04;
+            line-height: 1; pointer-events: none;
+        }
+
+        .sec-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+            color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+        }
+        .sec-tag::before { content: '◆'; font-size: 0.5rem; }
+
+        .sec-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            font-weight: 800; line-height: 1.08; margin-bottom: 18px;
+        }
+        .sec-title em { font-style: italic; color: var(--gold); }
+
+        .about-text {
+            font-size: 0.9rem; color: rgba(255,255,255,0.45);
+            line-height: 1.8; margin-bottom: 28px;
+        }
+
+        .features { display: flex; flex-direction: column; gap: 10px; }
+        .feat {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 14px;
+            background: rgba(212,168,67,0.05);
+            border: 1px solid rgba(212,168,67,0.12);
+            border-radius: 3px;
+            font-size: 0.86rem; font-weight: 500;
+        }
+        .feat-dot {
+            width: 24px; height: 24px;
+            background: linear-gradient(135deg, var(--red), var(--red2));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.65rem; color: var(--gold2); flex-shrink: 0; font-weight: 700;
+        }
+
+        /* ── GALLERY ── */
+        .gallery { padding: 40px 5vw; background: #0d0806; }
+        .gallery-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 8px; margin-top: 22px;
+        }
+        .gi {
+            border-radius: 3px; overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .gi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+        .gi:hover img { transform: scale(1.05); }
+        .gi.tall { grid-row: span 2; }
+        .gi:not(.tall) { aspect-ratio: 4/3; }
+        .gi.tall { aspect-ratio: 2/3; }
+        .gi-label {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 20px 12px 10px;
+            background: linear-gradient(to top, rgba(10,6,4,0.9), transparent);
+            color: white;
+        }
+        .gi-cn {
+            display: block; font-family: 'Noto Serif SC', serif;
+            font-size: 0.6rem; color: var(--gold); margin-bottom: 2px;
+            letter-spacing: 0.1em;
+        }
+        .gi-fr { font-size: 0.75rem; font-weight: 600; }
+
+        /* ── SERVICES ── */
+        .services {
+            padding: 52px 5vw;
+            background: linear-gradient(150deg, var(--red2) 0%, #1a0404 100%);
+            position: relative; overflow: hidden;
+        }
+        .services::before {
+            content: '服务';
+            position: absolute; right: -5px; bottom: 10%;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 7rem; font-weight: 700;
+            color: var(--gold); opacity: 0.05; line-height: 1;
+        }
+
+        .srv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+        .srv-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(212,168,67,0.15);
+            border-radius: 3px; padding: 22px 16px;
+            transition: all 0.3s;
+        }
+        .srv-card:hover { background: rgba(212,168,67,0.07); border-color: rgba(212,168,67,0.35); }
+        .srv-icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+        .srv-cn { font-family: 'Noto Serif SC', serif; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 6px; display: block; }
+        .srv-card h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; color: white; }
+        .srv-card p { font-size: 0.75rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+        /* ── RESERVATION ── */
+        .reservation {
+            padding: 64px 5vw; text-align: center;
+            background: var(--dark);
+            position: relative; overflow: hidden;
+        }
+        .reservation::before {
+            content: '';
+            position: absolute; top: 0; left: 5vw; right: 5vw; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .reservation::after {
+            content: '';
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(139,0,0,0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .res-cn { font-family: 'Noto Serif SC', serif; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.3em; margin-bottom: 16px; display: block; }
+        .res-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800; line-height: 1.05; margin-bottom: 12px;
+        }
+        .res-title em { font-style: italic; color: var(--gold); }
+        .res-sub { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-bottom: 32px; line-height: 1.7; }
+
+        .res-btns { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+
+        .btn-wa-big {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--green); color: white;
+            padding: 18px; border-radius: 3px;
+            text-decoration: none; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 12px 36px rgba(37,211,102,0.3);
+            letter-spacing: 0.03em;
+        }
+        .btn-tel-big {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: rgba(212,168,67,0.1);
+            border: 1px solid rgba(212,168,67,0.3);
+            color: var(--gold); padding: 17px; border-radius: 3px;
+            text-decoration: none; font-weight: 600; font-size: 0.95rem;
+        }
+
+        .res-note { margin-top: 22px; font-family: 'Noto Serif SC', serif; font-size: 0.7rem; color: rgba(212,168,67,0.35); letter-spacing: 0.2em; position: relative; z-index: 1; }
+
+        /* ── INFO ── */
+        .info { padding: 40px 5vw; background: var(--dark2); }
+        .info-cards { display: flex; flex-direction: column; gap: 8px; margin-top: 22px; }
+        .info-card {
+            display: flex; align-items: center; gap: 14px;
+            background: rgba(212,168,67,0.04);
+            border: 1px solid rgba(212,168,67,0.12);
+            padding: 16px; border-radius: 3px;
+        }
+        .info-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, rgba(139,0,0,0.3), rgba(212,168,67,0.1));
+            border: 1px solid rgba(212,168,67,0.2);
+            border-radius: 3px; display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; flex-shrink: 0;
+        }
+        .info-text strong { display: block; font-size: 0.85rem; font-weight: 700; color: var(--gold2); margin-bottom: 2px; }
+        .info-text span { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 28px 5vw;
+            background: #050302;
+            border-top: 1px solid rgba(212,168,67,0.12);
+            text-align: center;
+        }
+        .footer-cn { font-family: 'Noto Serif SC', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 0.25em; margin-bottom: 4px; }
+        .footer-fr { font-family: 'Playfair Display', serif; font-size: 0.75rem; color: rgba(255,255,255,0.2); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 14px; }
+        .footer-div { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 14px; }
+        footer p { font-size: 0.72rem; color: rgba(255,255,255,0.2); margin-bottom: 4px; }
+        footer a { color: var(--gold); text-decoration: none; font-size: 0.72rem; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (min-width: 768px) {
+            .hero { padding: 0 8vw 80px; }
+            .hero-btns { flex-direction: row; max-width: 420px; }
+            .srv-grid { grid-template-columns: repeat(4, 1fr); }
+            .res-btns { flex-direction: row; justify-content: center; }
+            .about, .gallery, .services, .reservation, .info { padding-left: 8vw; padding-right: 8vw; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">
+        <span class="logo-cn">萨奥酒店 · Hôtel Sao</span>
+        <span class="logo-fr">Restaurant · N'Djamena · Tchad</span>
+    </div>
+    <a href="https://wa.me/23566673535" class="nav-wa">💬 Réserver</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-grid">
+        <div class="hg"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&q=70" alt="Hotel"></div>
+        <div class="hg"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500&q=70" alt="Room"></div>
+        <div class="hg"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=70" alt="Restaurant"></div>
+        <div class="hg"><img src="https://images.unsplash.com/photo-1551882547-ff40c4a49f3e?w=500&q=70" alt="Lobby"></div>
+    </div>
+    <div class="hero-ov"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-deco">萨奥酒店餐厅</div>
+    <div class="hero-lines"><div class="hl"></div><div class="hl"></div><div class="hl"></div></div>
+
+    <div class="hero-content">
+        <div class="hero-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="hero-eyebrow">Bienvenue · 欢迎光临</div>
+        <h1 class="hero-title">Hôtel Sao</h1>
+        <span class="hero-cn">萨奥酒店 · 餐厅 · 乍得</span>
+        <p class="hero-sub">Hôtel & Restaurant au cœur de N'Djamena. Confort oriental et gastronomie authentique pour un séjour inoubliable.</p>
+        <div class="hero-btns">
+            <a href="https://wa.me/23566673535" class="btn-wa">💬 Réserver sur WhatsApp</a>
+            <a href="tel:+23566673535" class="btn-ghost">📞 +235 66 67 35 35</a>
+        </div>
+    </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+    <div class="dv-line"></div>
+    <span class="dv-sym">◆</span>
+    <span class="dv-cn">萨奥酒店餐厅 · N'Djamena</span>
+    <span class="dv-sym">◆</span>
+    <div class="dv-line"></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about reveal">
+    <span class="sec-tag">À propos</span>
+    <h2 class="sec-title">Élégance orientale<br><em>au Tchad</em></h2>
+    <p class="about-text">L'Hôtel Sao vous accueille dans un cadre alliant l'élégance orientale et le confort moderne. Notre restaurant propose une cuisine raffinée, mêlant saveurs asiatiques et africaines.</p>
+    <div class="features">
+        <div class="feat"><span class="feat-dot">✓</span> Chambres climatisées et confortables</div>
+        <div class="feat"><span class="feat-dot">✓</span> Restaurant gastronomique chinois & africain</div>
+        <div class="feat"><span class="feat-dot">✓</span> Service disponible 24h/24</div>
+        <div class="feat"><span class="feat-dot">✓</span> Cadre sécurisé et accueillant</div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery reveal">
+    <span class="sec-tag">Nos espaces</span>
+    <h2 class="sec-title">Découvrez<br><em>l'Hôtel Sao</em></h2>
+    <div class="gallery-grid">
+        <div class="gi tall">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&q=80" alt="Hotel Sao">
+            <div class="gi-label"><span class="gi-cn">酒店外观</span><span class="gi-fr">Façade & Entrée</span></div>
+        </div>
+        <div class="gi">
+            <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=400&q=80" alt="Chambre">
+            <div class="gi-label"><span class="gi-cn">客房</span><span class="gi-fr">Chambre double</span></div>
+        </div>
+        <div class="gi">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" alt="Restaurant">
+            <div class="gi-label"><span class="gi-cn">餐厅</span><span class="gi-fr">Restaurant</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+    <span class="sec-tag">Nos services</span>
+    <h2 class="sec-title" style="color:white;">Ce que nous<br><em>offrons</em></h2>
+    <div class="srv-grid">
+        <div class="srv-card reveal"><span class="srv-icon">🛏️</span><span class="srv-cn">住宿</span><h3>Hébergement</h3><p>Chambres climatisées et bien équipées pour votre confort.</p></div>
+        <div class="srv-card reveal"><span class="srv-icon">🍜</span><span class="srv-cn">餐饮</span><h3>Restaurant</h3><p>Cuisine chinoise et africaine, saveurs authentiques.</p></div>
+        <div class="srv-card reveal"><span class="srv-icon">🔒</span><span class="srv-cn">安全</span><h3>Sécurité</h3><p>Gardiennage 24h/24 pour votre tranquillité.</p></div>
+        <div class="srv-card reveal"><span class="srv-icon">🚗</span><span class="srv-cn">停车</span><h3>Parking</h3><p>Parking sécurisé pour les clients de l'hôtel.</p></div>
+    </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation">
+    <span class="res-cn">预订 · 联系我们 · Réservation</span>
+    <h2 class="res-title">Réservez votre<br><em>séjour</em></h2>
+    <p class="res-sub">Contactez-nous directement sur WhatsApp pour une réservation rapide. Réponse en moins de 30 minutes.</p>
+    <div class="res-btns">
+        <a href="https://wa.me/23566673535" class="btn-wa-big">💬 WhatsApp — +235 66 67 35 35</a>
+        <a href="tel:+23566673535" class="btn-tel-big">📞 Appeler maintenant</a>
+    </div>
+    <p class="res-note">萨奥酒店 · N'Djamena, Tchad · 全天候服务 24h/24</p>
+</section>
+
+<!-- INFO -->
+<section class="info reveal">
+    <span class="sec-tag">Informations</span>
+    <h2 class="sec-title">Nous trouver</h2>
+    <div class="info-cards">
+        <div class="info-card"><div class="info-icon">📍</div><div class="info-text"><strong>Adresse</strong><span>N'Djamena, Tchad</span></div></div>
+        <div class="info-card"><div class="info-icon">💬</div><div class="info-text"><strong>WhatsApp</strong><span>+235 66 67 35 35</span></div></div>
+        <div class="info-card"><div class="info-icon">📞</div><div class="info-text"><strong>Téléphone</strong><span>+235 66 67 35 35</span></div></div>
+        <div class="info-card"><div class="info-icon">🕐</div><div class="info-text"><strong>Réception</strong><span>Ouverte 24h/24, 7j/7</span></div></div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-cn">萨奥酒店</div>
+    <div class="footer-fr">Hôtel Sao · Restaurant</div>
+    <div class="footer-div"></div>
+    <p>© 2026 Hôtel Sao — N'Djamena, Tchad</p>
+    <p style="margin-top:6px;">Site réalisé par <a href="https://wa.me/23565008485">Brahim Nassour</a></p>
+</footer>
+
+<script>
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach((e, i) => {
+            if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+        });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+  </html>
