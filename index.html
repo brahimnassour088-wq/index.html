@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant — N'Djamena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600;1,800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #0d0800;
+            --dark2: #1a1000;
+            --gold: #c9922a;
+            --gold2: #e8b84b;
+            --cream: #fdf8f0;
+            --green: #25D366;
+            --gray: #8a7a6a;
+            --border: rgba(201,146,42,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--dark); color: #fff8f0; overflow-x: hidden; }
+
+        /* NAV */
+        nav {
+            padding: 16px 5vw;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0;
+            background: rgba(13,8,0,0.97);
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo {
+            display: flex; flex-direction: column;
+        }
+        .logo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .logo-sub { font-size: 0.6rem; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; text-transform: uppercase; }
+
+        .nav-links { display: none; gap: 24px; }
+        .nav-links a { font-size: 0.85rem; color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 500; }
+
+        .nav-wa {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--green); color: white;
+            padding: 10px 18px; border-radius: 100px;
+            text-decoration: none; font-size: 0.82rem; font-weight: 700;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100svh;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 0 5vw 56px;
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80') center/cover no-repeat;
+        }
+        .hero-ov {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(13,8,0,1) 0%, rgba(13,8,0,0.7) 50%, rgba(13,8,0,0.3) 100%);
+        }
+        .hero-vignette {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+        }
+
+        /* Decorative lines */
+        .hero-deco {
+            position: absolute; top: 30px; right: 5vw;
+            display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+        }
+        .deco-line {
+            height: 1px;
+            background: linear-gradient(to left, rgba(201,146,42,0.5), transparent);
+        }
+        .deco-line:nth-child(1) { width: 80px; }
+        .deco-line:nth-child(2) { width: 50px; }
+        .deco-line:nth-child(3) { width: 65px; }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(201,146,42,0.12);
+            border: 1px solid rgba(201,146,42,0.3);
+            color: var(--gold2); padding: 5px 13px; border-radius: 100px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; margin-bottom: 20px; width: fit-content;
+        }
+        .pulse { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 12vw, 6rem);
+            font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.02em; margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff 0%, var(--gold2) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; font-style: italic;
+            color: var(--gold); letter-spacing: 0.1em; margin-bottom: 18px; display: block;
+        }
+        .hero-desc {
+            font-size: 0.92rem; color: rgba(255,248,240,0.55);
+            line-height: 1.75; margin-bottom: 28px; max-width: 340px;
+        }
+        .hero-desc strong { color: rgba(255,248,240,0.9); font-weight: 600; }
+
+        .hero-btns { display: flex; flex-direction: column; gap: 10px; }
+        .btn-main {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--green); color: white; padding: 17px; border-radius: 14px;
+            text-decoration: none; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 8px 28px rgba(37,211,102,0.3);
+        }
+        .btn-menu {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: rgba(201,146,42,0.1); border: 1px solid rgba(201,146,42,0.3);
+            color: var(--gold2); padding: 15px; border-radius: 14px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
+        }
+
+        /* INFOS RAPIDES */
+        .quick-info {
+            display: flex; gap: 0;
+            background: var(--dark2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .qi {
+            flex: 1; padding: 18px 12px; text-align: center;
+            border-right: 1px solid var(--border);
+        }
+        .qi:last-child { border-right: none; }
+        .qi-icon { font-size: 1.2rem; margin-bottom: 4px; display: block; }
+        .qi-text { font-size: 0.72rem; color: rgba(255,248,240,0.45); display: block; }
+        .qi-val { font-size: 0.82rem; font-weight: 700; color: var(--gold2); display: block; }
+
+        /* ABOUT */
+        .about { padding: 52px 5vw; background: var(--dark); position: relative; overflow: hidden; }
+        .about::after {
+            content: '🍽️';
+            position: absolute; right: 5vw; top: 50%; transform: translateY(-50%);
+            font-size: 8rem; opacity: 0.04; pointer-events: none;
+        }
+
+        .sec-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+            color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+        }
+        .sec-tag::before { content: '◆'; font-size: 0.5rem; }
+
+        .sec-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 6vw, 2.8rem); font-weight: 900;
+            line-height: 1.08; margin-bottom: 18px;
+        }
+        .sec-title em { font-style: italic; color: var(--gold); }
+
+        .about-text { font-size: 0.9rem; color: rgba(255,248,240,0.45); line-height: 1.8; margin-bottom: 28px; }
+
+        .features { display: flex; flex-direction: column; gap: 10px; }
+        .feat {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 16px;
+            background: rgba(201,146,42,0.05); border: 1px solid rgba(201,146,42,0.12);
+            border-radius: 14px; font-size: 0.86rem; font-weight: 500;
+        }
+        .feat-icon {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, rgba(201,146,42,0.2), rgba(201,146,42,0.05));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; flex-shrink: 0;
+        }
+
+        /* MENU */
+        .menu-section { padding: 52px 5vw; background: var(--dark2); }
+
+        .menu-categories {
+            display: flex; gap: 8px; margin: 20px 0 24px;
+            overflow-x: auto; padding-bottom: 4px;
+        }
+        .menu-categories::-webkit-scrollbar { display: none; }
+        .cat-btn {
+            padding: 8px 18px; border-radius: 100px;
+            font-size: 0.82rem; font-weight: 600; white-space: nowrap;
+            cursor: pointer; border: none; transition: all 0.2s;
+            background: rgba(201,146,42,0.08);
+            border: 1px solid rgba(201,146,42,0.15);
+            color: rgba(255,248,240,0.6);
+        }
+        .cat-btn.active {
+            background: var(--gold); color: var(--dark); border-color: var(--gold);
+        }
+
+        .menu-grid { display: flex; flex-direction: column; gap: 10px; }
+        .menu-item {
+            display: flex; align-items: center; gap: 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(201,146,42,0.1);
+            border-radius: 16px; padding: 16px;
+            transition: all 0.25s;
+        }
+        .menu-item:hover { border-color: rgba(201,146,42,0.3); background: rgba(201,146,42,0.05); }
+        .menu-img {
+            width: 70px; height: 70px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+        }
+        .menu-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .menu-info { flex: 1; }
+        .menu-name { font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+        .menu-desc { font-size: 0.75rem; color: rgba(255,248,240,0.4); line-height: 1.5; margin-bottom: 6px; }
+        .menu-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; font-weight: 700; color: var(--gold2);
+        }
+
+        /* GALERIE */
+        .galerie { padding: 40px 5vw; background: var(--dark); }
+        .gal-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 8px; margin-top: 22px;
+        }
+        .gal-item {
+            border-radius: 14px; overflow: hidden;
+            position: relative;
+        }
+        .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+        .gal-item:hover img { transform: scale(1.05); }
+        .gal-item.big { grid-column: span 2; aspect-ratio: 16/9; }
+        .gal-item:not(.big) { aspect-ratio: 1; }
+
+        /* RESERVATION */
+        .reservation {
+            padding: 64px 5vw; text-align: center;
+            background: var(--dark2); position: relative; overflow: hidden;
+        }
+        .reservation::before {
+            content: ''; position: absolute; top: 0; left: 5vw; right: 5vw; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .reservation::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(201,146,42,0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .res-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; display: block; }
+        .res-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 12px;
+        }
+        .res-title em { font-style: italic; color: var(--gold); }
+        .res-sub { font-size: 0.88rem; color: rgba(255,248,240,0.4); margin-bottom: 32px; line-height: 1.7; }
+
+        .res-btns { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+        .btn-wa-big {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--green); color: white; padding: 18px; border-radius: 14px;
+            text-decoration: none; font-weight: 700; font-size: 1rem;
+            box-shadow: 0 12px 36px rgba(37,211,102,0.3);
+        }
+        .btn-gold-big {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--gold); color: var(--dark);
+            padding: 17px; border-radius: 14px;
+            text-decoration: none; font-weight: 800; font-size: 0.95rem;
+        }
+
+        /* HORAIRES */
+        .horaires { padding: 40px 5vw; background: var(--dark); }
+        .hor-cards { display: flex; flex-direction: column; gap: 8px; margin-top: 22px; }
+        .hor-card {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(201,146,42,0.04); border: 1px solid rgba(201,146,42,0.1);
+            padding: 14px 18px; border-radius: 12px;
+        }
+        .hor-day { font-size: 0.88rem; font-weight: 600; }
+        .hor-time { font-size: 0.82rem; color: var(--gold2); font-weight: 600; }
+        .hor-closed { font-size: 0.82rem; color: rgba(255,248,240,0.3); }
+
+        /* FLOATING */
+        .float-btn {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            z-index: 300; width: calc(100% - 40px); max-width: 400px;
+        }
+        .float-btn a {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--green); color: white; padding: 16px; border-radius: 100px;
+            text-decoration: none; font-weight: 800; font-size: 0.95rem;
+            box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+
+        /* FOOTER */
+        footer {
+            padding: 28px 5vw; background: #050300;
+            border-top: 1px solid var(--border);
+            text-align: center; padding-bottom: 90px;
+        }
+        .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .footer-sub { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; }
+        .footer-div { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 14px; }
+        footer p { font-size: 0.72rem; color: rgba(255,255,255,0.2); margin-bottom: 4px; }
+        footer a { color: var(--gold); text-decoration: none; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (min-width: 768px) {
+            .hero { padding: 0 8vw 80px; }
+            .hero-btns { flex-direction: row; max-width: 420px; }
+            .nav-links { display: flex; }
+            .res-btns { flex-direction: row; justify-content: center; }
+            .about, .menu-section, .galerie, .reservation, .horaires { padding-left: 8vw; padding-right: 8vw; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">
+        <span class="logo-name">Votre Restaurant</span>
+        <span class="logo-sub">N'Djamena · Tchad</span>
+    </div>
+    <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#reservation">Réserver</a>
+    </div>
+    <a href="https://wa.me/235XXXXXXXXX" class="nav-wa">💬 Réserver</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-ov"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-deco">
+        <div class="deco-line"></div>
+        <div class="deco-line"></div>
+        <div class="deco-line"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-tag"><span class="pulse"></span> Ouvert maintenant</div>
+        <h1 class="hero-title">Votre<br>Restaurant</h1>
+        <span class="hero-subtitle">— Une expérience culinaire unique —</span>
+        <p class="hero-desc">Découvrez une cuisine <strong>authentique et savoureuse</strong> préparée avec passion. Un cadre chaleureux pour tous vos moments spéciaux.</p>
+        <div class="hero-btns">
+            <a href="https://wa.me/235XXXXXXXXX" class="btn-main">💬 Réserver une table</a>
+            <a href="#menu" class="btn-menu">🍽️ Voir le menu</a>
+        </div>
+    </div>
+</section>
+
+<!-- INFOS RAPIDES -->
+<div class="quick-info reveal">
+    <div class="qi">
+        <span class="qi-icon">📍</span>
+        <span class="qi-val">N'Djamena</span>
+        <span class="qi-text">Localisation</span>
+    </div>
+    <div class="qi">
+        <span class="qi-icon">🕐</span>
+        <span class="qi-val">8h — 23h</span>
+        <span class="qi-text">Horaires</span>
+    </div>
+    <div class="qi">
+        <span class="qi-icon">📞</span>
+        <span class="qi-val">Sur WhatsApp</span>
+        <span class="qi-text">Réservation</span>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about reveal">
+    <span class="sec-tag">Notre histoire</span>
+    <h2 class="sec-title">Une cuisine faite<br><em>avec passion</em></h2>
+    <p class="about-text">Nous vous proposons une expérience gastronomique unique dans un cadre chaleureux et accueillant. Chaque plat est préparé avec des ingrédients frais et de qualité.</p>
+    <div class="features">
+        <div class="feat"><span class="feat-icon">👨‍🍳</span> Cuisine préparée par des chefs expérimentés</div>
+        <div class="feat"><span class="feat-icon">🥗</span> Ingrédients frais et de saison</div>
+        <div class="feat"><span class="feat-icon">🏡</span> Cadre chaleureux et accueillant</div>
+        <div class="feat"><span class="feat-icon">🚗</span> Parking disponible</div>
+    </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section reveal" id="menu">
+    <span class="sec-tag">Notre menu</span>
+    <h2 class="sec-title">Nos <em>spécialités</em></h2>
+
+    <div class="menu-categories">
+        <button class="cat-btn active">Tout</button>
+        <button class="cat-btn">Entrées</button>
+        <button class="cat-btn">Plats</button>
+        <button class="cat-btn">Grillades</button>
+        <button class="cat-btn">Desserts</button>
+        <button class="cat-btn">Boissons</button>
+    </div>
+
+    <div class="menu-grid">
+        <div class="menu-item">
+            <div class="menu-img"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&q=80" alt="Plat"></div>
+            <div class="menu-info">
+                <div class="menu-name">Spécialité du Chef</div>
+                <div class="menu-desc">Notre plat signature préparé avec soin chaque jour.</div>
+                <div class="menu-price">X XXX FCFA</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=200&q=80" alt="Plat"></div>
+            <div class="menu-info">
+                <div class="menu-name">Grillade Maison</div>
+                <div class="menu-desc">Viandes grillées à la perfection avec épices locales.</div>
+                <div class="menu-price">X XXX FCFA</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&q=80" alt="Plat"></div>
+            <div class="menu-info">
+                <div class="menu-name">Plat Traditionnel</div>
+                <div class="menu-desc">Saveurs authentiques de notre cuisine locale.</div>
+                <div class="menu-price">X XXX FCFA</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="menu-img"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&q=80" alt="Dessert"></div>
+            <div class="menu-info">
+                <div class="menu-name">Dessert Maison</div>
+                <div class="menu-desc">Douceurs préparées chaque jour par notre équipe.</div>
+                <div class="menu-price">X XXX FCFA</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALERIE -->
+<section class="galerie reveal" id="galerie">
+    <span class="sec-tag">Notre espace</span>
+    <h2 class="sec-title">Découvrez<br><em>l'ambiance</em></h2>
+    <div class="gal-grid">
+        <div class="gal-item big">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Restaurant">
+        </div>
+        <div class="gal-item">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=80" alt="Intérieur">
+        </div>
+        <div class="gal-item">
+            <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=400&q=80" alt="Plats">
+        </div>
+    </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+    <span class="res-tag">Réservation</span>
+    <h2 class="res-title reveal">Réservez votre<br><em>table</em></h2>
+    <p class="res-sub reveal">Contactez-nous sur WhatsApp pour réserver. Réponse rapide garantie !</p>
+    <div class="res-btns reveal">
+        <a href="https://wa.me/235XXXXXXXXX" class="btn-wa-big">💬 Réserver sur WhatsApp</a>
+        <a href="tel:+235XXXXXXXXX" class="btn-gold-big">📞 Appeler maintenant</a>
+    </div>
+</section>
+
+<!-- HORAIRES -->
+<section class="horaires reveal">
+    <span class="sec-tag">Horaires</span>
+    <h2 class="sec-title">Nos <em>horaires</em></h2>
+    <div class="hor-cards">
+        <div class="hor-card"><span class="hor-day">Lundi — Vendredi</span><span class="hor-time">8h00 — 23h00</span></div>
+        <div class="hor-card"><span class="hor-day">Samedi</span><span class="hor-time">9h00 — 00h00</span></div>
+        <div class="hor-card"><span class="hor-day">Dimanche</span><span class="hor-time">10h00 — 22h00</span></div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-name">Votre Restaurant</div>
+    <div class="footer-sub">N'Djamena · Tchad</div>
+    <div class="footer-div"></div>
+    <p>© 2026 — Tous droits réservés</p>
+    <p style="margin-top:6px;">Site réalisé par <a href="https://wa.me/23565008485">Brahim Nassour</a></p>
+</footer>
+
+<!-- FLOATING -->
+<div class="float-btn">
+    <a href="https://wa.me/235XXXXXXXXX">💬 Réserver une table</a>
+</div>
+
+<script>
+    // Menu categories
+    const catBtns = document.querySelectorAll('.cat-btn');
+    catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            catBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach((e, i) => {
+            if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+        });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
